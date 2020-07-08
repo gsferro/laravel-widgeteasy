@@ -1,0 +1,105 @@
+#close-setting {
+    margin-right: 15px;
+    color: #555;
+    vertical-align: top;
+}
+
+.portlet-placeholder {
+    border: 1px dotted black;
+    margin: 0 1em 1em 0;
+    height: 50px;
+}
+
+#sortable li:hover {
+    cursor: pointer;
+}
+
+#sortable li.ui-sortable-helper{
+    cursor: move;
+}
+
+#theme-setting2 .fa-ul
+{
+    display: inline-block;
+    margin: 0 0 0 -5px !important
+}
+
+#theme-setting2 > .fa-ul > li > span
+{
+    cursor:pointer;
+    font-weight:bold;
+    font-size: 20px;
+}
+
+li.close-count
+{
+    margin-left: -4px;
+}
+
+/*  widgets menu */
+#theme-setting > a:hover {
+    text-decoration: none;
+    color: #555;
+}
+
+#theme-setting2 a:hover {
+    text-decoration: none;
+    color: #555;
+}
+#theme-setting > a {
+    display: inline-block;
+    color: #999;
+    vertical-align: top;
+    background: none repeat scroll 0% 0% rgba(255, 255, 255, 0.7);
+    padding: 7px;
+}
+
+#theme-setting {
+    position: absolute;
+    top: 170px;
+    right: 0px;
+    z-index: 9;
+/*    white-space: nowrap;*/
+}
+
+#theme-setting ul, #theme-setting2 ul {
+    list-style-type: none;
+}
+
+#theme-setting2 {
+    position: absolute;
+    top: 170px;
+    right: 0px;
+    z-index: 9;
+    white-space: nowrap;
+    width: 280px;
+    border: 0.3px solid #f2f2f2;
+    padding: 10px;
+    background-color: #fff;
+}
+
+.hide-setting {
+    display: none;
+}
+
+.show-setting {
+    display: inline-block;
+}
+
+#closed-widget-count
+{
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.open-widget
+{
+    color: black;
+    font-style: italic;
+}
+
+.li-hr {
+    height: 1px;
+    margin: 5px 0;
+    background-color: #e5e5e5;
+}

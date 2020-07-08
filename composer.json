@@ -1,0 +1,25 @@
+{
+  "name": "gsferro/widgeteasy",
+  "description": "Manipulação de widget easy com salvamento em preferencia de usuário",
+  "authors": [
+    {
+      "name": "Guilherme Ferro",
+      "email": "gsferroti@gmail.com"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "Gsferro\\WidgetEasy\\": "src/"
+    }
+  },
+  "extra": {
+    "laravel": {
+      "providers": [
+        "Gsferro\\WidgetEasy\\Providers\\WidgetEasyServiceProvider"
+      ],
+      "aliases": {
+        "WidgetEasy": "Gsferro\\WidgetEasy\\Facades\\WidgetEasy"
+      }
+    }
+  }
+}
