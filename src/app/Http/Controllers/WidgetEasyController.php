@@ -2,8 +2,7 @@
 
 namespace Gsferro\WidgetEasy\Http\Controllers;
 
-use App\Helpers;
-use App\Model\UsuariosPreferencias;
+use Gsferro\WidgetEasy\Model\WidgetEasy;
 use Illuminate\Http\Request;
 
 /**
@@ -17,6 +16,7 @@ use Illuminate\Http\Request;
  */
 class WidgetEasyController extends Controller
 {
+    private $modal;
     public function __invoke( Request $request )
     {
         // encapsulamento
@@ -25,13 +25,17 @@ class WidgetEasyController extends Controller
         # validações request
         // pegando o termo
         $method = $dados[ "method" ];
-        if( blank( $method ) ) return $this->sendError( "Pesquisa obrigatório!" );
+        if( blank( $method ) ) return redirect()->back();
 
+        $this->modal = new WidgetEasy();
         return $this->$method($dados);
     }
     /////////////////////////////// Widget dashboard
+
     /**
      * faz a ação de inserir na tbl usuario_preferencia
+     * @param array $dados
+     * @return mixed|string|null
      */
     private function widgetInsere($dados = [])
     {
@@ -47,7 +51,7 @@ class WidgetEasyController extends Controller
                 {
                     $_item = explode( ',', $item );
                     $exist = array_search( $dados[ "itens" ], $_item );
-                    //			echo $exist;
+
                     if( $exist !== false ) // se tiver retira
                         unset( $_item[ $exist ] );
                     else // senão insere
@@ -64,20 +68,20 @@ class WidgetEasyController extends Controller
                 break;
         }
 
-        $user = UsuariosPreferencias::find( session( 'usuario' )[ "login" ] );
-        if( $user->update( [ $collum => ( Helpers::StringIsNotNull( $valor ) ? $valor : null ) ] ) ) return $valor;
+        $user = $this->modal;
+        if( $user->update( [ $collum => ( self::StringIsNotNull( $valor ) ? $valor : null ) ] ) ) return $valor;
         else
             return null;
     }
 
     private function widgetOpenAll()
     {
-        return (int)UsuariosPreferencias::find( session( 'usuario' )[ "login" ] )->update( [ 'widget_hidden' => null ] );
+        return (int)$this->modal->update( [ 'widget_hidden' => null ] );
     }
 
     private function widgetReset()
     {
-        return (int)UsuariosPreferencias::find( session( 'usuario' )[ "login" ] )->update( [
+        return (int)$this->modal->update( [
             'widget_hidden'         => null,
             'widget_position_left'  => null,
             'widget_position_right' => null
@@ -86,6 +90,8 @@ class WidgetEasyController extends Controller
 
     /**
      * faz a ação de retornar da tbl usuario_preferencia
+     * @param array $dados
+     * @return bool|int
      */
     private function widgetRetorna($dados = [])
     {
@@ -112,8 +118,15 @@ class WidgetEasyController extends Controller
 
     private function wgGet( $collum )
     {
-        $reg = UsuariosPreferencias::firstOrCreate( [ 'login' => session( 'usuario' )[ "login" ] ] );
+        $reg = WidgetEasy::firstOrCreate( [ 'user_id' => auth()->user()->id ] );
 
-        return ( Helpers::StringIsNotNull( $reg[ $collum ] ) ? $reg[ $collum ] : 0 );
+        return ( self::StringIsNotNull( $reg[ $collum ] ) ? $reg[ $collum ] : 0 );
+    }
+
+    private static function StringIsNotNull( $str )
+    {
+        // se for null retorna direto
+        if( is_null( $str ) ) return false;
+        return ( strlen( trim( $str ) ) > 0 ? true : false );
     }
 }
