@@ -8,13 +8,14 @@ use Illuminate\Database\Eloquent\Model;
 class WidgetEasy extends Model
 {
     protected $fillable = [
-            "user_id",
-            "widget_hidden",
-            "widget_position_left",
-            "widget_position_right",
-        ];
-    protected $table      = "widgeteasy";
-    protected $primaryKey = "user_id";
+        "user_id",
+        "widget_hidden",
+        "widget_position_left",
+        "widget_position_right",
+    ];
+    protected $table        = "widgeteasy";
+    protected $primaryKey   = "user_id";
+    public    $incrementing = false;
 
     protected static function boot()
     {
