@@ -37,7 +37,7 @@ class WidgetEasyServiceProvider extends ServiceProvider
 
         $this->publishes([
             __DIR__.'/../resources/lang' => resource_path('lang'),
-            __DIR__.'/../resources/views/components' => resource_path('views/components/widget-easy'),
+//            __DIR__.'/../resources/views/components' => resource_path('views/components/widget-easy'),
         ], 'resources');
 
         /*
@@ -45,10 +45,10 @@ class WidgetEasyServiceProvider extends ServiceProvider
         | Alias blade
         |---------------------------------------------------
         */
-        Blade::component("components.widget-easy.widget_actions","widget_actions");
-        Blade::component("components.widget-easy.widget_children","widget_children");
-        Blade::component("components.widget-easy.widget_container","widget_container");
-        Blade::component("components.widget-easy.widget_side","widget_side");
+        Blade::component("widget-easy::container","widget-container");
+        Blade::component("widget-easy::actions","widget-actions");
+        Blade::component("widget-easy::children","widget-children");
+        Blade::component("widget-easy::side","widget-side");
 
         Blade::directive("WidgeteasyCSS", function(){
             return "<link rel='stylesheet' href=". asset('vendor/widget-easy/widgets/widgets.css'). " type='text/css'>";
