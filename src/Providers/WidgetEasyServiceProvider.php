@@ -16,7 +16,7 @@ class WidgetEasyServiceProvider extends ServiceProvider
         |---------------------------------------------------
         */
         $this->loadRoutesFrom(__DIR__ . '/../routes/web.php');
-        $this->loadViewsFrom(__DIR__ . "/../resources/views", "widget-easy");
+        $this->loadViewsFrom(__DIR__ . "/../resources/views/components", "widget-easy");
 
         /*
         |---------------------------------------------------
