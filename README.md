@@ -1,5 +1,9 @@
 ![Logo](logo.png)
 
+### Demo
+
+![](demo.gif)
+
 ### Dependencias
 
 - [Jquery](https://jquery.com/download/)
@@ -16,6 +20,7 @@ composer require gsferro/widget-easy && php artisan vendor:publish --provider="G
 @WidgeteasyCSS()
 @WidgeteasyJS()
 ```
+
 ### Uso
 
 - Estrutura básica
