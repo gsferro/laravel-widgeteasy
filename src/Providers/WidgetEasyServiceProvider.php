@@ -45,10 +45,10 @@ class WidgetEasyServiceProvider extends ServiceProvider
         | Alias blade
         |---------------------------------------------------
         */
-        Blade::component("widget-easy::container","widget-container");
-        Blade::component("widget-easy::actions","widget-actions");
-        Blade::component("widget-easy::children","widget-children");
-        Blade::component("widget-easy::side","widget-side");
+        Blade::component("widget-easy::container","widget-easy-container");
+        Blade::component("widget-easy::actions","widget-easy-actions");
+        Blade::component("widget-easy::children","widget-easy-children");
+        Blade::component("widget-easy::side","widget-easy-side");
 
         Blade::directive("WidgeteasyCSS", function(){
             return "<link rel='stylesheet' href=". asset('vendor/widget-easy/widgets/widgets.css'). " type='text/css'>";

@@ -25,21 +25,21 @@ composer require gsferro/widget-easy && php artisan vendor:publish --provider="G
 ### Uso
 
 ```html
-<x-widget-container>
+<x-widget-easy-container>
     <x-slot name="left">
         <!-- items iniciais do lado esquerdo --->
-        <x-widget-children id="<id>">
+        <x-widget-easy-children id="<id>">
             <!-- seu componente / html --->
             left
-        </x-widget-children>
+        </x-widget-easy-children>
     </x-slot>
 
     <x-slot name="right">
         <!-- items iniciais do lado direito --->
-        <x-widget-children id="<id>">
+        <x-widget-easy-children id="<id>">
             <!-- seu componente / html --->
             right
-        </x-widget-children>
+        </x-widget-easy-children>
     </x-slot>
-</x-widget-container>
+</x-widget-easy-container>
 ```
