@@ -31,7 +31,7 @@ class WidgetEasyServiceProvider extends ServiceProvider
             $timestamp = date('Y_m_d_His', time());
 
             $this->publishes([
-                __DIR__.'/../migrations/create_wigdet_easy_table.php.stub' => database_path('migrations/'.$timestamp.'create_wigdet_easy_table.php'),
+                __DIR__.'/../migrations/create_wigdet_easy_table.php.stub' => database_path('migrations/'.$timestamp.'_create_wigdet_easy_table.php'),
             ], 'migrations');
         }
 
@@ -45,14 +45,15 @@ class WidgetEasyServiceProvider extends ServiceProvider
         | Alias blade
         |---------------------------------------------------
         */
-        Blade::component("components.widget-easy.widget_actions","widgetActions");
-        Blade::component("components.widget-easy.widget_children","widgetChild");
+        Blade::component("components.widget-easy.widgets.widget_actions","widget_actions");
+        Blade::component("components.widget-easy.widgets.widget_children","widget_children");
+        Blade::component("components.widget-easy.widgets.widget_container","widget_container");
 
-        Blade::directive("widgeteasyCSS", function(){
+        Blade::directive("WidgeteasyCSS", function(){
             return "<link rel='stylesheet' href=". asset('vendor/widgets-easy/widgets/widgets.css'). " type='text/css'>";
         });
 
-        Blade::directive("widgeteasyJS", function(){
+        Blade::directive("WidgeteasyJS", function(){
             return "<script type='text/javascript' src=".asset('vendor/widgets-easy/widgets/widgets.js')."></script>";
         });
     }

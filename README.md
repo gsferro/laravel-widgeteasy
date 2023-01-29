@@ -17,3 +17,8 @@ salvando em banco como preferência de usuário logado.
 ```bash 
 composer require gsferro/widget-easy && php artisan vendor:publish --provider="Gsferro\WidgetEasy\Providers\WidgetEasyServiceProvider" --force
 ```
+
+```bash
+@WidgeteasyCSS()
+@WidgeteasyJS()
+```
