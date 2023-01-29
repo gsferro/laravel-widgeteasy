@@ -113,7 +113,7 @@ li.close-count
 
 }
 /* *********************************** */
-.grid-cabecalho {
+.widget-easy-container {
     display: grid;
     justify-content: center;
     justify-items: center;
@@ -125,6 +125,6 @@ li.close-count
     display: grid;
     justify-content: center;
 }
-.grid-cabecalho > div.widget-sides {
+.widget-easy-container > div.widget-sides {
     width: 99%;
 }

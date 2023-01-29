@@ -22,3 +22,24 @@ composer require gsferro/widget-easy && php artisan vendor:publish --provider="G
 @WidgeteasyCSS()
 @WidgeteasyJS()
 ```
+### Uso
+
+```html
+<x-widget_container>
+    <x-slot name="left">
+        <!-- items iniciais do lado esquerdo --->
+        <x-widget_children id="<id>">
+            <!-- seu componente / html --->
+            left
+        </x-widget_children>
+    </x-slot>
+
+    <x-slot name="right">
+        <!-- items iniciais do lado direito --->
+        <x-widget_children id="<id>">
+            <!-- seu componente / html --->
+            right
+        </x-widget_children>
+    </x-slot>
+</x-widget_container>
+```
