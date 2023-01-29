@@ -48,7 +48,9 @@ class WidgetEasyServiceProvider extends ServiceProvider
         Blade::component("components.widget-easy.widget_actions","widget_actions");
         Blade::component("components.widget-easy.widget_children","widget_children");
         Blade::component("components.widget-easy.widget_container","widget_container");
-        Blade::component("components.widget-easy.widget_side","widget_side");
+        Blade::component("components.widget-easy.sides.widget_side","widget_side");
+        Blade::component("components.widget-easy.sides.widget_side_left","widget_left");
+        Blade::component("components.widget-easy.sides.widget_side_right","widget_right");
 
         Blade::directive("WidgeteasyCSS", function(){
             return "<link rel='stylesheet' href=". asset('vendor/widget-easy/widgets/widgets.css'). " type='text/css'>";

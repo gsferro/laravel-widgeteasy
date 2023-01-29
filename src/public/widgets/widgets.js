@@ -32,7 +32,7 @@ $( function()
 	 * Adds jQuery UI sortable portlet functionality to widgets
 	 */
 	$( "#widgets-easy" ).find("#widgetLeft, #widgetRight").sortable( {
-		handle            : ".with-border" ,
+		// handle            : ".with-border" ,
 		connectWith       : ".connectedSortable" ,
 		//cancel            : "#filter-ps" ,
 		cursor            : "move" ,
