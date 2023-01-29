@@ -24,22 +24,37 @@ composer require gsferro/widget-easy && php artisan vendor:publish --provider="G
 ```
 ### Uso
 
-```html
-<x-widget-easy-container>
-    <x-slot name="left">
-        <!-- items iniciais do lado esquerdo --->
-        <x-widget-easy-children id="<id>">
-            <!-- seu componente / html --->
-            left
-        </x-widget-easy-children>
-    </x-slot>
+- Estrutura basica
+    ```html
+    <x-widget-easy-container>
+        <x-slot name="left">
+            <!-- items iniciais do lado esquerdo --->
+            <x-widget-easy-children id="<id>">
+                <!-- seu componente / html --->
+                left
+            </x-widget-easy-children>
+        </x-slot>
+    
+        <x-slot name="right">
+            <!-- items iniciais do lado direito --->
+            <x-widget-easy-children id="<id>">
+                <!-- seu componente / html --->
+                right
+            </x-widget-easy-children>
+        </x-slot>
+    </x-widget-easy-container>
+    ```
 
-    <x-slot name="right">
-        <!-- items iniciais do lado direito --->
-        <x-widget-easy-children id="<id>">
-            <!-- seu componente / html --->
-            right
-        </x-widget-easy-children>
-    </x-slot>
-</x-widget-easy-container>
-```
+- Titulo
+    ```html
+    <x-widget-easy-children id="<id>" title="<title>">
+        <!-- seu componente / html --->
+    </x-widget-easy-children>
+    ```
+
+- Ocultável (Obrigatorio title)
+    ```html
+    <x-widget-easy-children id="<id>" title="<title>" isRemovible>
+        <!-- seu componente / html --->
+    </x-widget-easy-children>
+    ```

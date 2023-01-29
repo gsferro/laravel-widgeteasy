@@ -305,16 +305,18 @@ $( function() {
 			if( $( this ).is( ':visible' ) )
 			{
 				var widget = $( this );
-
-				// encapsulando em array
-				widgetNames.push( widget.attr( 'id' ) );
-				// colocando hide
-				widget.hide( 400 );
-				// pega as informações
-				var widgetName       = widget.find( '.box-header h3' ).text() || widget.find( '.inner p' ).text();
-				var widgetIdentifier = widget.attr( 'id' );
-				// add to hidden list
-				$( '#closed-widget-list' ).append( '<li><a href="javascript:void(0)" id="open" class="open-widget" data-id="' + widgetIdentifier + '"><i class="fa fa-external-link-square fa-flip-horizontal fa-fw"></i> ' + widgetName + '</a></li>' );
+				if (!! widget.find('div.box-tools').length)
+				{
+					// encapsulando em array
+					widgetNames.push( widget.attr( 'id' ) );
+					// colocando hide
+					widget.hide( 400 );
+					// pega as informações
+					var widgetName       = widget.find( '.box-header h3' ).text() || widget.find( '.inner p' ).text();
+					var widgetIdentifier = widget.attr( 'id' );
+					// add to hidden list
+					$( '#closed-widget-list' ).append( '<li><a href="javascript:void(0)" id="open" class="open-widget" data-id="' + widgetIdentifier + '"><i class="fa fa-external-link-square fa-flip-horizontal fa-fw"></i> ' + widgetName + '</a></li>' );
+				}
 			}
 		} ).promise().done( function() {
 			// ação somente se tiver alguem a ser fechado
