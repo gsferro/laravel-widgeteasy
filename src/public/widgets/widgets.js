@@ -26,7 +26,7 @@
 	 ...
  } );
  * */
-$( async function() {
+$( function() {
 	/**
 	 * Adds jQuery UI sortable portlet functionality to widgets
 	 */
@@ -69,9 +69,6 @@ $( async function() {
 
 	// hide localstored hidden widgets
 	keepWidgetHidden();
-
-
-	showContainer();
 } );
 
 /**
@@ -201,9 +198,9 @@ function getSide( side , sideId )
 		}
 
 		var order = setInterval( function() {
-			if( side == 'right' && (count == 0 || data == 0) )
-				console.log( order );
-			realOrder( order );
+			if( side == 'right' && (count == 0 || data == 0) ){
+				realOrder( order );
+			}
 		} , 1 );
 	} );
 }
@@ -237,6 +234,8 @@ function realOrder( order )
 		var widget = $( this ).parents( '.widget-easy' );
 		hideWidget( widget , 300 , true );
 	} );
+
+	showContainer();
 }
 
 function orderSide( divs , sideId )
@@ -262,7 +261,7 @@ function orderSide( divs , sideId )
 function showContainer()
 {
 	// dps de atualizar
-	$( '#widgets-easy' ).show( 1500 );
+	$( '#widgets-easy' ).show( "fast" );
 }
 
 ///////////////////////////////////////////// BTN ACTIONS
