@@ -108,10 +108,20 @@ li.close-count
     min-height: 50px;
 }
 
-/* --------------------- */
-.widget-children {
+/* *********************************** */
 
+#theme-setting2 .text-primary {
+    color: #337ab7;
 }
+
+#theme-setting2 .text-danger {
+    color: #a94442;
+}
+
+#theme-setting2 .text-muted {
+    color: #777;
+}
+
 /* *********************************** */
 .widget-easy-container {
     display: grid;
