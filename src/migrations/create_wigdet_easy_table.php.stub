@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateWigdetEasyTable extends Migration
+return new class extends Migration
 {
     private $table;
     public function __construct()
@@ -39,4 +39,4 @@ class CreateWigdetEasyTable extends Migration
     {
         Schema::dropIfExists($this->table);
     }
-}
+};
