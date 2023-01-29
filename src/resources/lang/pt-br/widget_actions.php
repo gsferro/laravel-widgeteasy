@@ -1,8 +1,8 @@
 <?php
 
 return [
-    'atualizar' => 'Atualizar Painel',
-    'fechar'    => 'Fechar todos',
-    'abrir'     => 'Abrir todos',
-    'resetar'   => 'Resetar',
+    'update' => 'Atualizar Painel',
+    'close'  => 'Fechar todos',
+    'open'   => 'Abrir todos',
+    'reset'  => 'Resetar',
 ];

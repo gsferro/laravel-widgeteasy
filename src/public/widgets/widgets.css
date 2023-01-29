@@ -59,7 +59,7 @@ li.close-count
     top: 170px;
     right: 0px;
     z-index: 9;
-/*    white-space: nowrap;*/
+    /*    white-space: nowrap;*/
 }
 
 #theme-setting ul, #theme-setting2 ul {
@@ -104,6 +104,27 @@ li.close-count
     background-color: #e5e5e5;
 }
 
-.min-height-container {
-    min-height: 500px;
+.widget-sides-min-height {
+    min-height: 50px;
+}
+
+/* --------------------- */
+.widget-children {
+
+}
+/* *********************************** */
+.grid-cabecalho {
+    display: grid;
+    justify-content: center;
+    justify-items: center;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    padding: 8px;
+}
+
+.grid-itens-centralizados {
+    display: grid;
+    justify-content: center;
+}
+.grid-cabecalho > div.widget-sides {
+    width: 99%;
 }

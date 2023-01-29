@@ -45,16 +45,17 @@ class WidgetEasyServiceProvider extends ServiceProvider
         | Alias blade
         |---------------------------------------------------
         */
-        Blade::component("components.widget-easy.widgets.widget_actions","widget_actions");
-        Blade::component("components.widget-easy.widgets.widget_children","widget_children");
-        Blade::component("components.widget-easy.widgets.widget_container","widget_container");
+        Blade::component("components.widget-easy.widget_actions","widget_actions");
+        Blade::component("components.widget-easy.widget_children","widget_children");
+        Blade::component("components.widget-easy.widget_container","widget_container");
+        Blade::component("components.widget-easy.widget_side","widget_side");
 
         Blade::directive("WidgeteasyCSS", function(){
-            return "<link rel='stylesheet' href=". asset('vendor/widgets-easy/widgets/widgets.css'). " type='text/css'>";
+            return "<link rel='stylesheet' href=". asset('vendor/widget-easy/widgets/widgets.css'). " type='text/css'>";
         });
 
         Blade::directive("WidgeteasyJS", function(){
-            return "<script type='text/javascript' src=".asset('vendor/widgets-easy/widgets/widgets.js')."></script>";
+            return "<script type='text/javascript' src=".asset('vendor/widget-easy/widgets/widgets.js')."></script>";
         });
     }
 }

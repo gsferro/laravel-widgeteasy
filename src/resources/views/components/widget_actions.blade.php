@@ -14,26 +14,26 @@
             <li>
                 <span onclick="location.reload()">
                     <i class="fa fa-refresh fa-lg text-primary fa-fw"></i>
-                    @lang('widget_actions.atualizar')
+                    @lang('widget_actions.update')
                 </span>
             </li>
             <li class="li-hr"></li>
             <li>
                 <span id="close-all-widgets">
                     <i class="fa fa-times-circle fa-lg text-danger fa-fw"></i>
-                    @lang('widget_actions.fechar')
+                    @lang('widget_actions.close')
                 </span>
             </li>
             <li>
                 <span id="open-all-widgets">
                     <i class="fa fa-plus-circle fa-lg text-success fa-fw"></i>
-                    @lang('widget_actions.abrir')
+                    @lang('widget_actions.open')
                 </span>
             </li>
             <li>
                 <span id="reset-widgets">
                     <i class="fa fa-recycle fa-lg text-muted fa-fw"></i>
-                    @lang('widget_actions.resetar')
+                    @lang('widget_actions.reset')
                 </span>
             </li>
             <li class="li-hr"></li>

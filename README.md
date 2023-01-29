@@ -8,9 +8,9 @@ salvando em banco como preferência de usuário logado.
 
 ### Dependencias
 
-- Jquery
-- Jquery UI
-- font-aewsome
+- [Jquery](https://jquery.com/download/)
+- [Jquery UI](https://releases.jquery.com/ui/)
+- [font-aewsome 4](https://fontawesome.com/v4.7.0/icons/)
 
 ### Instalação
 

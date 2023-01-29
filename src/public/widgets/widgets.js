@@ -26,12 +26,12 @@
 	 ...
  } );
  * */
-$( document ).ready( function()
+$( function()
 {
 	/**
 	 * Adds jQuery UI sortable portlet functionality to widgets
 	 */
-	$( "#widgets" ).find("#widgetLeft, #widgetRight").sortable( {
+	$( "#widgets-easy" ).find("#widgetLeft, #widgetRight").sortable( {
 		handle            : ".with-border" ,
 		connectWith       : ".connectedSortable" ,
 		//cancel            : "#filter-ps" ,
@@ -46,7 +46,7 @@ $( document ).ready( function()
 			// save widget order in localStorage
 			var left = [];
 			var right = [];
-			$( '.widget' ).each( function()
+			$( '.widget-easy' ).each( function()
 			{
 				var side = $( this ).parents('.connectedSortable' ).attr( "id" );
 				if (side == "widgetLeft")
@@ -54,23 +54,26 @@ $( document ).ready( function()
 				else
 					right.push( $( this ).attr( "id" ) );
 			} )
-			.promise()
-			.done( function()
-			{
-				//console.log( left.toString() );
-				//console.log( right.toString() );
+				.promise()
+				.done( function()
+				{
+					//console.log( left.toString() );
+					//console.log( right.toString() );
 
-				ajaxData( 'widgetInsere', { opc : 'left' , itens : left.toString() } );
-				ajaxData( 'widgetInsere', { opc : 'right' , itens : right.toString() } );
-			} );
+					// ajaxData( 'widgetInsere', { opc : 'left' , itens : left.toString() } );
+					// ajaxData( 'widgetInsere', { opc : 'right' , itens : right.toString() } );
+
+				} );
 		}
 	} ).disableSelection();
 
+	$( '#widgets-easy' ).show( 1000 );
+
 	// keep widgets ordered
-	keepWidgetOrdered();
+	// keepWidgetOrdered();
 
 	// hide localstored hidden widgets
-	keepWidgetHidden();
+	// keepWidgetHidden();
 
 } );
 
@@ -83,11 +86,11 @@ function ajaxData( method , args , acao )
 
 	if( !$.isPlainObject( args ) ) args = {};
 
-	let arg = $.extends( args , {
+	let arg = $.extend( args , {
 		"method" : method
 	} );
 
-	$.get( "/widgeteasy", arg , acao , "text" );
+	$.get( "/widget-easy", arg , acao , "text" );
 }
 
 
@@ -97,10 +100,10 @@ function ajaxData( method , args , acao )
  *
  **/
 
-// general cached DOM objects
+	// general cached DOM objects
 var closedWidgetCount = $( '#closed-widget-count' );
 var closedWidgets     = $( '#closed-widget-list' );
-var allWidgets        = $( '.widget' );
+var allWidgets        = $( '.widget-easy' );
 
 // unhide closed widget
 $( document ).on( 'click' , '#open' , function()
@@ -204,7 +207,7 @@ function getSide(side, sideId)
 			// var otherSide = (side == "left" ? "right" : "left");
 			// var otherSide = (side == "left" ? "right" : "left");
 			//console.log( "other side: " + otherSide);
-			$( "#widgets" ).find( sideId ).find('.widget' ).attr( 'data-side' , side );
+			$( "#widgets" ).find( sideId ).find('.widget-easy' ).attr( 'data-side' , side );
 		}
 
 		var order = setInterval( function()
@@ -227,8 +230,8 @@ function realOrder( order )
 	var right = widgets.find( "#widgetRight" );
 
 	// get other side
-	var rightInLeft = left.find( '.widget[data-side="right"]' );
-	var leftInRight = right.find( '.widget[data-side="left"]' );
+	var rightInLeft = left.find( '.widget-easy[data-side="right"]' );
+	var leftInRight = right.find( '.widget-easy[data-side="left"]' );
 
 	// remove side wrong
 	$( rightInLeft ).remove();
@@ -237,13 +240,13 @@ function realOrder( order )
 	$( "#widgetRight" ).append( rightInLeft );
 	$( "#widgetLeft" ).append( leftInRight );
 
-	orderSide( left.find( '.widget' ) , "#widgetLeft" );
-	orderSide( right.find( '.widget' ) , "#widgetRight" );
+	orderSide( left.find( '.widget-easy' ) , "#widgetLeft" );
+	orderSide( right.find( '.widget-easy' ) , "#widgetRight" );
 
 	// hide / close widget function
 	$( '.hide-widget' ).on( 'click' , function()
 	{
-		var widget = $( this ).parents( '.widget' );
+		var widget = $( this ).parents( '.widget-easy' );
 		hideWidget( widget , 300 , true );
 	} );
 }
@@ -272,89 +275,92 @@ function orderSide(divs , sideId)
 
 
 ///////////////////////////////////////////// BTN ACTIONS
-$( '#theme-setting' ).on("click", function()
-{
-	var setting  = $( '#theme-setting' );
-	var setting2 = $( '#theme-setting2' );
-
-	if( setting.hasClass( "show-setting" ) )
+$( function() {
+	$( '#theme-setting' ).on("click", function()
 	{
-		setting.addClass( "hide-setting" );
-		setting.removeClass( "show-setting" );
+		console.log( "click" );
+		var setting  = $( '#theme-setting' );
+		var setting2 = $( '#theme-setting2' );
 
-		setting2.addClass( "show-setting" );
-		setting2.removeClass( "hide-setting" );
-	}
-} );
+		if( setting.hasClass( "show-setting" ) )
+		{
+			setting.addClass( "hide-setting" );
+			setting.removeClass( "show-setting" );
 
-$( '#close-setting' ).on("click", function()
-{
-	var setting  = $( '#theme-setting' );
-	var setting2 = $( '#theme-setting2' );
+			setting2.addClass( "show-setting" );
+			setting2.removeClass( "hide-setting" );
+		}
+	} );
 
-	if( setting2.hasClass( "show-setting" ) )
+	$( '#close-setting' ).on("click", function()
 	{
-		setting2.addClass( "hide-setting" );
-		setting2.removeClass( "show-setting" );
+		var setting  = $( '#theme-setting' );
+		var setting2 = $( '#theme-setting2' );
 
-		setting.addClass( "show-setting" );
-		setting.removeClass( "hide-setting" );
-	}
-} );
+		if( setting2.hasClass( "show-setting" ) )
+		{
+			setting2.addClass( "hide-setting" );
+			setting2.removeClass( "show-setting" );
 
-// Close all widgets
-$( '#close-all-widgets' ).on( "click", function()
-{
-	var widgetNames = [];
-	allWidgets.each( function()
+			setting.addClass( "show-setting" );
+			setting.removeClass( "hide-setting" );
+		}
+	} );
+
+	// Close all widgets
+	$( '#close-all-widgets' ).on( "click", function()
 	{
-		if( $( this ).is( ":visible" ) )
+		var widgetNames = [];
+		allWidgets.each( function()
+		{
+			if( $( this ).is( ":visible" ) )
+			{
+				var widget = $( this );
+
+				// encapsulando em array
+				widgetNames.push(widget.attr( 'id' ));
+				// colocando hide
+				widget.hide( 400 );
+				// pega as informações
+				var widgetName       = widget.find( '.box-header h3' ).text() || widget.find( '.inner p' ).text();
+				var widgetIdentifier = widget.attr( 'id' );
+				// add to hidden list
+				closedWidgets.append( '<li><a href="javascript:void(0)" id="open" class="open-widget" data-id="' + widgetIdentifier + '"><i class="fa fa-external-link-square fa-flip-horizontal fa-fw"></i> ' + widgetName + '</a></li>' );
+			}
+		} ).promise().done(function( ) {
+			// ação somente se tiver alguem a ser fechado
+			if(widgetNames.length > 0)
+			{
+				closedWidgetCount.text( $('#closed-widget-list').find('li').length );
+				ajaxData( 'widgetInsere', { opc : 'hidden' , itens : widgetNames.toString() } );
+			}
+		});
+	} );
+
+	// Open all widgets
+	$( '#open-all-widgets' ).on( "click", function()
+	{
+		allWidgets.each( function()
 		{
 			var widget = $( this );
+			// exibe
+			widget.show( 500 );
 
-			// encapsulando em array
-			widgetNames.push(widget.attr( 'id' ));
-			// colocando hide
-			widget.hide( 400 );
-			// pega as informações
-			var widgetName       = widget.find( '.box-header h3' ).text() || widget.find( '.inner p' ).text();
-			var widgetIdentifier = widget.attr( 'id' );
-			// add to hidden list
-			closedWidgets.append( '<li><a href="javascript:void(0)" id="open" class="open-widget" data-id="' + widgetIdentifier + '"><i class="fa fa-external-link-square fa-flip-horizontal fa-fw"></i> ' + widgetName + '</a></li>' );
-		}
-	} ).promise().done(function( ) {
-		// ação somente se tiver alguem a ser fechado
-		if(widgetNames.length > 0)
-		{
-			closedWidgetCount.text( $('#closed-widget-list').find('li').length );
-			ajaxData( 'widgetInsere', { opc : 'hidden' , itens : widgetNames.toString() } );
-		}
-	});
-} );
+			// limpando contadores
+			closedWidgets.empty();
+			closedWidgetCount.text( 0 );
 
-// Open all widgets
-$( '#open-all-widgets' ).on( "click", function()
-{
-	allWidgets.each( function()
-	{
-		var widget = $( this );
-		// exibe
-		widget.show( 500 );
-
-		// limpando contadores
-		closedWidgets.empty();
-		closedWidgetCount.text( 0 );
-
-	} ).promise().done( function() {
-		ajaxData( 'widgetOpenAll' );
+		} ).promise().done( function() {
+			ajaxData( 'widgetOpenAll' );
+		} );
 	} );
-} );
 
-// Open all widgets
-$( '#reset-widgets' ).on( "click", function()
-{
-	ajaxData( 'widgetReset', {}, function( r ) {
-		r && location.reload();
+	// Open all widgets
+	$( '#reset-widgets' ).on( "click", function()
+	{
+		ajaxData( 'widgetReset', {}, function( r ) {
+			r && location.reload();
+		} );
 	} );
 } );
 
