@@ -1,6 +1,6 @@
 <div class="row">
     <div id="theme-setting" class="show-setting" data-toggle="tooltip"
-         title="Preferência de exibição das widgets do Dashboard" data-placement="bottom">
+         title="{{ __('widget_actions.description') }}" data-placement="bottom">
         <a href="javascript:void(0)">
             <i class="fa fa-chevron-circle-left fa-2x"></i>
         </a>

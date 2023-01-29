@@ -94,9 +94,9 @@ function ajaxData( method , args , acao )
  **/
 
 	// general cached DOM objects
-var closedWidgetCount = $( '#closed-widget-count' );
-var closedWidgets     = $( '#closed-widget-list' );
-var allWidgets        = $( '.widget-easy' );
+	// let closedWidgetCount = $( '#closed-widget-count' );
+	// let closedWidgets     = $( '#closed-widget-list' );
+let allWidgets        = $( '.widget-easy' );
 
 // unhide closed widget
 $( document ).on( 'click' , '#open' , function() {
@@ -115,7 +115,7 @@ function openWidget( widget , widgetIdentifier , speed )
 {
 	// decrement closed-widget-count
 	if( widget.is( ':hidden' ) )
-		closedWidgetCount.text( Number( closedWidgetCount.text() ) - 1 );
+		$( '#closed-widget-count' ).text( Number( $( '#closed-widget-count' ).text() ) - 1 );
 	else
 		return;
 
@@ -132,15 +132,18 @@ function hideWidget( widget , speed , remove )
 	var widgetName       = widget.find( '.box-header h3' ).text() || widget.find( '.inner p' ).text();
 	var widgetIdentifier = widget.attr( 'id' );
 
+	console.log( widgetIdentifier );
+	console.log( widgetName );
+
 	// update count
 	if( !widget.is( ':hidden' ) )
-		closedWidgetCount.text( Number( closedWidgetCount.text() ) + 1 );
+		$( '#closed-widget-count' ).text( Number( $( '#closed-widget-count' ).text() ) + 1 );
 
 	// hide widget from DOM
 	widget.hide( speed );
 
 	// add to hidden list
-	closedWidgets.append( '<li><a href="javascript:void(0)" id="open" class="open-widget" data-id="' + widgetIdentifier + '"><i class="fa fa-external-link-square fa-flip-horizontal fa-fw"></i> ' + widgetName + '</a></li>' );
+	$( '#closed-widget-list' ).append( '<li><a href="javascript:void(0)" id="open" class="open-widget" data-id="' + widgetIdentifier + '"><i class="fa fa-external-link-square fa-flip-horizontal fa-fw"></i> ' + widgetName + '</a></li>' );
 
 	// remove true
 	remove && ajaxData( 'widgetInsere' , { opc : 'hidden' , itens : widgetIdentifier } );
@@ -298,7 +301,7 @@ $( function() {
 	// Close all widgets
 	$( '#close-all-widgets' ).on( 'click' , function() {
 		var widgetNames = [];
-		allWidgets.each( function() {
+		$( '.widget-easy' ).each( function() {
 			if( $( this ).is( ':visible' ) )
 			{
 				var widget = $( this );
@@ -311,13 +314,13 @@ $( function() {
 				var widgetName       = widget.find( '.box-header h3' ).text() || widget.find( '.inner p' ).text();
 				var widgetIdentifier = widget.attr( 'id' );
 				// add to hidden list
-				closedWidgets.append( '<li><a href="javascript:void(0)" id="open" class="open-widget" data-id="' + widgetIdentifier + '"><i class="fa fa-external-link-square fa-flip-horizontal fa-fw"></i> ' + widgetName + '</a></li>' );
+				$( '#closed-widget-list' ).append( '<li><a href="javascript:void(0)" id="open" class="open-widget" data-id="' + widgetIdentifier + '"><i class="fa fa-external-link-square fa-flip-horizontal fa-fw"></i> ' + widgetName + '</a></li>' );
 			}
 		} ).promise().done( function() {
 			// ação somente se tiver alguem a ser fechado
 			if( widgetNames.length > 0 )
 			{
-				closedWidgetCount.text( $( '#closed-widget-list' ).find( 'li' ).length );
+				$( '#closed-widget-count' ).text( $( '#closed-widget-list' ).find( 'li' ).length );
 				ajaxData( 'widgetInsere' , { opc : 'hidden' , itens : widgetNames.toString() } );
 			}
 		} );
@@ -325,14 +328,14 @@ $( function() {
 
 	// Open all widgets
 	$( '#open-all-widgets' ).on( 'click' , function() {
-		allWidgets.each( function() {
+		$( '.widget-easy' ).each( function() {
 			var widget = $( this );
 			// exibe
 			widget.show( 500 );
 
 			// limpando contadores
-			closedWidgets.empty();
-			closedWidgetCount.text( 0 );
+			$( '#closed-widget-list' ).empty();
+			$( '#closed-widget-count' ).text( 0 );
 
 		} ).promise().done( function() {
 			ajaxData( 'widgetOpenAll' );
