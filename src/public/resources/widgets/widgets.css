@@ -103,3 +103,7 @@ li.close-count
     margin: 5px 0;
     background-color: #e5e5e5;
 }
+
+.min-height-container {
+    min-height: 500px;
+}

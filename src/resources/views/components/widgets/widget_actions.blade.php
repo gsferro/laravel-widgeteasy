@@ -4,7 +4,7 @@
         <a href="javascript:void(0)">
             <i class="fa fa-chevron-circle-left fa-2x"></i>
         </a>
-        <ul style="display: none;"></ul>
+        <ul class="hide-setting"></ul>
     </div>
     <div id="theme-setting2" class="hide-setting">
         <a href="javascript:void(0)">
@@ -13,23 +13,27 @@
         <ul class="fa-ul">
             <li>
                 <span onclick="location.reload()">
-                    <i class="fa fa-refresh fa-lg text-primary fa-fw"></i> Atualizar Painel
+                    <i class="fa fa-refresh fa-lg text-primary fa-fw"></i>
+                    @lang('widget_actions.atualizar')
                 </span>
             </li>
             <li class="li-hr"></li>
             <li>
                 <span id="close-all-widgets">
-                    <i class="fa fa-times-circle fa-lg text-danger fa-fw"></i> Fechar todos
+                    <i class="fa fa-times-circle fa-lg text-danger fa-fw"></i>
+                    @lang('widget_actions.fechar')
                 </span>
             </li>
             <li>
                 <span id="open-all-widgets">
-                    <i class="fa fa-plus-circle fa-lg text-success fa-fw"></i> Abrir todos
+                    <i class="fa fa-plus-circle fa-lg text-success fa-fw"></i>
+                    @lang('widget_actions.abrir')
                 </span>
             </li>
             <li>
                 <span id="reset-widgets">
-                    <i class="fa fa-recycle fa-lg text-muted fa-fw"></i> Resetar
+                    <i class="fa fa-recycle fa-lg text-muted fa-fw"></i>
+                    @lang('widget_actions.resetar')
                 </span>
             </li>
             <li class="li-hr"></li>

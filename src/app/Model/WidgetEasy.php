@@ -13,7 +13,7 @@ class WidgetEasy extends Model
         "widget_position_left",
         "widget_position_right",
     ];
-    protected $table        = "widgeteasy";
+    protected $table        = "widget_easy";
     protected $primaryKey   = "user_id";
     public    $incrementing = false;
 

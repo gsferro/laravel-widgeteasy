@@ -1,5 +1,8 @@
 {
-  "name": "gsferro/widgeteasy",
+  "name": "gsferro/widget-easy",
+  "type": "library",
+  "license": "MIT",
+  "keywords" : ["Laravel", "CSS", "Font", "awesome", "Font awesome", "FA", "Stack", "Ping"],
   "description": "Manipulação de widget easy com salvamento em preferencia de usuário",
   "authors": [
     {

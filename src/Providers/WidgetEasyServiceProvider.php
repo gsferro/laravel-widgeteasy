@@ -16,7 +16,7 @@ class WidgetEasyServiceProvider extends ServiceProvider
         |---------------------------------------------------
         */
         $this->loadRoutesFrom(__DIR__ . '/../routes/web.php');
-        $this->loadViewsFrom(__DIR__ . "/../resources/views", "widgeteasy");
+        $this->loadViewsFrom(__DIR__ . "/../resources/views", "widget-easy");
 
         /*
         |---------------------------------------------------
@@ -24,33 +24,36 @@ class WidgetEasyServiceProvider extends ServiceProvider
         |---------------------------------------------------
         */
         $this->publishes([
-            __DIR__ . '/../public' => public_path('vendor/widgeteasy'),
+            __DIR__ . '/../public' => public_path('vendor/widget-easy'),
         ], 'public');
+
+        if (! class_exists('CreateLanguageLinesTable')) {
+            $timestamp = date('Y_m_d_His', time());
+
+            $this->publishes([
+                __DIR__.'/../migrations/create_wigdet_easy_table.php.stub' => database_path('migrations/'.$timestamp.'create_wigdet_easy_table.php'),
+            ], 'migrations');
+        }
+
         $this->publishes([
-            __DIR__.'/../migrations' => database_path('migrations')
-        ], 'migrations');
+            __DIR__.'/../resources/lang' => resource_path('lang'),
+            __DIR__.'/../resources/views/components' => resource_path('views/components/widget-easy'),
+        ], 'resources');
 
         /*
         |---------------------------------------------------
         | Alias blade
         |---------------------------------------------------
         */
-        Blade::component("vendor/gsferro/widgeteasy/resources/views/widget_actions","widgetActions");
-        Blade::component("vendor/gsferro/widgeteasy/resources/views/widget_children","widgetChild");
+        Blade::component("components.widget-easy.widget_actions","widgetActions");
+        Blade::component("components.widget-easy.widget_children","widgetChild");
 
         Blade::directive("widgeteasyCSS", function(){
-            return '<link rel="stylesheet" href="/vendor/gsferro/widgeteasy/resources/widgets/widgets.css" type="text/css">';
+            return "<link rel='stylesheet' href=". asset('vendor/widgets-easy/widgets/widgets.css'). " type='text/css'>";
         });
 
         Blade::directive("widgeteasyJS", function(){
-            return '<script type="text/javascript" src="/vendor/gsferro/widgeteasy/resources/widgets/widgets2.js"></script>';
-        });
-
-        Blade::directive("odometer", function(){
-            return '
-                <link rel="stylesheet" href="/vendor/gsferro/widgeteasy/resources/odometer/themes/odometer.css" type="text/css">
-                <script type="text/javascript" src="/vendor/gsferro/widgeteasy/resources/odometer/odometer.js"></script>
-            ';
+            return "<script type='text/javascript' src=".asset('vendor/widgets-easy/widgets/widgets.js')."></script>";
         });
     }
 }
