@@ -158,6 +158,8 @@ function keepWidgetHidden()
 			$.each( localData , function( i , value ) {
 				hideWidget( $( '#' + value ) , 0 , false );
 			} );
+
+			$( '#closed-widget-count' ).text( $( '#closed-widget-list' ).find( 'li' ).length );
 		}
 	} );
 }
