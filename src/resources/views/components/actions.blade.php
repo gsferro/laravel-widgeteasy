@@ -38,7 +38,7 @@
             </li>
             <li class="li-hr"></li>
             <li class="close-count">
-                Fechados: <span id="closed-widget-count">0</span>
+                @lang('widget_actions.total_closes'): <span id="closed-widget-count">0</span>
             </li>
             <ul id="closed-widget-list" class="fa-ul"></ul>
         </ul>

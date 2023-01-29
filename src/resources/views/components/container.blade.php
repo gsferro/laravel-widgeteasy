@@ -5,7 +5,9 @@
         {{ $left }}
     </x-widget-easy-side>
 
-    <x-widget-easy-side id="widgetRight">
-        {{ $right }}
-    </x-widget-easy-side>
+    @isset($right)
+        <x-widget-easy-side id="widgetRight">
+            {{ $right }}
+        </x-widget-easy-side>
+    @endisset
 </div>
