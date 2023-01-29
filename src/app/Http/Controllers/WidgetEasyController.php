@@ -2,6 +2,7 @@
 
 namespace Gsferro\WidgetEasy\Http\Controllers;
 
+use App\Http\Controllers\Controller;
 use Gsferro\WidgetEasy\Model\WidgetEasy;
 use Illuminate\Http\Request;
 
