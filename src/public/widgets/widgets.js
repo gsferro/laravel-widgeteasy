@@ -64,11 +64,11 @@ $( function() {
 		}
 	} ).disableSelection();
 
-	// keep widgets ordered
-	keepWidgetOrdered();
-
 	// hide localstored hidden widgets
 	keepWidgetHidden();
+
+	// keep widgets ordered
+	keepWidgetOrdered();
 } );
 
 /**
