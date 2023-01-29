@@ -1,10 +1,4 @@
-# Laravel WidgetEasy
-Pacote para criar dashboard baseado em widget com ordenação lateral e visibiildade, 
-salvando em banco como preferência de usuário logado.
-
-# Uso
-1. Publiquei o vendor
-1. Adicione as 
+![Logo](logo.png)
 
 ### Dependencias
 
@@ -24,14 +18,13 @@ composer require gsferro/widget-easy && php artisan vendor:publish --provider="G
 ```
 ### Uso
 
-- Estrutura basica
+- Estrutura básica
     ```html
     <x-widget-easy-container>
         <x-slot name="left">
             <!-- items iniciais do lado esquerdo --->
             <x-widget-easy-children id="<id>">
                 <!-- seu componente / html --->
-                left
             </x-widget-easy-children>
         </x-slot>
     
@@ -39,22 +32,30 @@ composer require gsferro/widget-easy && php artisan vendor:publish --provider="G
             <!-- items iniciais do lado direito --->
             <x-widget-easy-children id="<id>">
                 <!-- seu componente / html --->
-                right
             </x-widget-easy-children>
         </x-slot>
     </x-widget-easy-container>
     ```
 
-- Titulo
+- Com Título
     ```html
     <x-widget-easy-children id="<id>" title="<title>">
         <!-- seu componente / html --->
     </x-widget-easy-children>
     ```
 
-- Ocultável (Obrigatorio title)
+- Ocultável (Obrigatório Título)
     ```html
     <x-widget-easy-children id="<id>" title="<title>" isRemovible>
         <!-- seu componente / html --->
     </x-widget-easy-children>
     ```
+
+### Informações Gerais
+
+1. É necessário estar logado, pois é utilizado como pk `auth()->user()->id`
+
+
+### License
+
+- MIT License

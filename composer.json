@@ -2,8 +2,8 @@
   "name": "gsferro/widget-easy",
   "type": "library",
   "license": "MIT",
-  "keywords" : ["Laravel", "CSS", "Font", "awesome", "Font awesome", "FA", "Stack", "Ping"],
-  "description": "Manipulação de widget easy com salvamento em preferencia de usuário",
+  "keywords" : ["laravel", "jquery", "jquery ui", "widget", "widgets", "dashboard", "font awesome", "preference", "user"],
+  "description": "Manipulate your dashboard and widgets, with database persistence and user preference, easily",
   "authors": [
     {
       "name": "Guilherme Ferro",
@@ -15,14 +15,14 @@
       "Gsferro\\WidgetEasy\\": "src/"
     }
   },
+  "require": {
+    "laravel/framework": "~8"
+  },
   "extra": {
     "laravel": {
       "providers": [
         "Gsferro\\WidgetEasy\\Providers\\WidgetEasyServiceProvider"
-      ],
-      "aliases": {
-        "WidgetEasy": "Gsferro\\WidgetEasy\\Facades\\WidgetEasy"
-      }
+      ]
     }
   }
 }
