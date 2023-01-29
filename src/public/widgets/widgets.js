@@ -26,55 +26,52 @@
 	 ...
  } );
  * */
-$( function()
-{
+$( async function() {
 	/**
 	 * Adds jQuery UI sortable portlet functionality to widgets
 	 */
-	$( "#widgets-easy" ).find("#widgetLeft, #widgetRight").sortable( {
-		// handle            : ".with-border" ,
-		connectWith       : ".connectedSortable" ,
-		//cancel            : "#filter-ps" ,
-		cursor            : "move" ,
+	$( '#widgets-easy' ).find( '#widgetLeft, #widgetRight' ).sortable( {
+		// handle            : '.with-border' ,
+		connectWith : '.connectedSortable' ,
+		//cancel            : '#filter-ps' ,
+		cursor            : 'move' ,
 		opacity           : 0.7 ,
 		scrollSensitivity : 3 ,
 		//tolerance         : 'move' ,
-		placeholder       : "portlet-placeholder ui-corner-all" ,
-		stop              : function( event , ui )
-		{
+		placeholder : 'portlet-placeholder ui-corner-all' ,
+		stop        : function( event , ui ) {
 			// console.log( event );
 			// save widget order in localStorage
-			var left = [];
+			var left  = [];
 			var right = [];
-			$( '.widget-easy' ).each( function()
-			{
-				var side = $( this ).parents('.connectedSortable' ).attr( "id" );
-				if (side == "widgetLeft")
-					left.push( $( this ).attr( "id" ) );
+			$( '.widget-easy' ).each( function() {
+				var side = $( this ).parents( '.connectedSortable' ).attr( 'id' );
+				let id   = $( this ).attr( 'id' );
+
+				if( side == 'widgetLeft' )
+					left.push( id );
 				else
-					right.push( $( this ).attr( "id" ) );
+					right.push( id );
 			} )
 				.promise()
-				.done( function()
-				{
-					//console.log( left.toString() );
-					//console.log( right.toString() );
+				.done( function() {
+					// console.log( left.toString() );
+					// console.log( right.toString() );
 
-					// ajaxData( 'widgetInsere', { opc : 'left' , itens : left.toString() } );
-					// ajaxData( 'widgetInsere', { opc : 'right' , itens : right.toString() } );
-
+					ajaxData( 'widgetInsere' , { opc : 'left' , itens : left.toString() } );
+					ajaxData( 'widgetInsere' , { opc : 'right' , itens : right.toString() } );
 				} );
 		}
 	} ).disableSelection();
 
-	$( '#widgets-easy' ).show( 1000 );
-
 	// keep widgets ordered
-	// keepWidgetOrdered();
+	keepWidgetOrdered();
 
 	// hide localstored hidden widgets
-	// keepWidgetHidden();
+	keepWidgetHidden();
 
+
+	showContainer();
 } );
 
 /**
@@ -87,12 +84,11 @@ function ajaxData( method , args , acao )
 	if( !$.isPlainObject( args ) ) args = {};
 
 	let arg = $.extend( args , {
-		"method" : method
+		'method' : method
 	} );
 
-	$.get( "/widget-easy", arg , acao , "text" );
+	$.get( '/widget-easy' , arg , acao , 'text' );
 }
-
 
 /**
  *
@@ -106,11 +102,10 @@ var closedWidgets     = $( '#closed-widget-list' );
 var allWidgets        = $( '.widget-easy' );
 
 // unhide closed widget
-$( document ).on( 'click' , '#open' , function()
-{
+$( document ).on( 'click' , '#open' , function() {
 	// cache DOM objects/data used in this function
 	var widgetIdentifier = $( this ).data( 'id' );
-	var widget           = $( "#" + widgetIdentifier );
+	var widget           = $( '#' + widgetIdentifier );
 	var navItem          = $( this ).parent();
 
 	openWidget( widget , widgetIdentifier , 500 );
@@ -122,7 +117,7 @@ $( document ).on( 'click' , '#open' , function()
 function openWidget( widget , widgetIdentifier , speed )
 {
 	// decrement closed-widget-count
-	if( widget.is( ":hidden" ) )
+	if( widget.is( ':hidden' ) )
 		closedWidgetCount.text( Number( closedWidgetCount.text() ) - 1 );
 	else
 		return;
@@ -131,7 +126,7 @@ function openWidget( widget , widgetIdentifier , speed )
 	widget.show( 500 );
 
 	// remove widget_hidden
-	ajaxData( 'widgetInsere', { opc : 'hidden' , itens : widgetIdentifier } );
+	ajaxData( 'widgetInsere' , { opc : 'hidden' , itens : widgetIdentifier } );
 }
 
 function hideWidget( widget , speed , remove )
@@ -141,7 +136,7 @@ function hideWidget( widget , speed , remove )
 	var widgetIdentifier = widget.attr( 'id' );
 
 	// update count
-	if( !widget.is( ":hidden" ) )
+	if( !widget.is( ':hidden' ) )
 		closedWidgetCount.text( Number( closedWidgetCount.text() ) + 1 );
 
 	// hide widget from DOM
@@ -151,19 +146,17 @@ function hideWidget( widget , speed , remove )
 	closedWidgets.append( '<li><a href="javascript:void(0)" id="open" class="open-widget" data-id="' + widgetIdentifier + '"><i class="fa fa-external-link-square fa-flip-horizontal fa-fw"></i> ' + widgetName + '</a></li>' );
 
 	// remove true
-	remove && ajaxData( 'widgetInsere', { opc : 'hidden' , itens : widgetIdentifier } );
+	remove && ajaxData( 'widgetInsere' , { opc : 'hidden' , itens : widgetIdentifier } );
 }
 
 function keepWidgetHidden()
 {
-	ajaxData( 'widgetRetorna', { opc : 'hidden' } , function( data )
-	{
+	ajaxData( 'widgetRetorna' , { opc : 'hidden' } , function( data ) {
 		if( data != 0 )
 		{
-			var localData = data.split( "," );
-			$.each( localData , function( i , value )
-			{
-				hideWidget( $( "#" + value ) , 0 , false );
+			var localData = data.split( ',' );
+			$.each( localData , function( i , value ) {
+				hideWidget( $( '#' + value ) , 0 , false );
 			} );
 		}
 	} );
@@ -171,29 +164,26 @@ function keepWidgetHidden()
 
 function keepWidgetOrdered()
 {
-	getSide("left", "#widgetLeft");
-	getSide("right", "#widgetRight");
+	getSide( 'left' , '#widgetLeft' );
+	getSide( 'right' , '#widgetRight' );
 }
 
-function getSide(side, sideId)
+function getSide( side , sideId )
 {
-	//console.log( side );
-	ajaxData( 'widgetRetorna', { opc : side } , function( data )
+	ajaxData( 'widgetRetorna' , { opc : side } , function( data )
 	{
-		// console.log( data );
 		var count = 1;
 		if( data != 0 )
 		{
-			var localData = data.split( "," );
+			var localData = data.split( ',' );
 			// console.log( typeof localData );
-			count = 0;
-			$.each(localData, function( i , value )
-			{
+			count         = 0;
+			$.each( localData , function( i , value ) {
 				count++;
-				let widgetId = "#" + value;
+				let widgetId = '#' + value;
 				let numOrder = i++;
 
-				let elem = $( "#widgets" ).find( widgetId );
+				let elem = $( '#widgets-easy' ).find( widgetId );
 
 				elem.attr( 'data-order' , numOrder );
 				elem.attr( 'data-side' , side );
@@ -204,30 +194,29 @@ function getSide(side, sideId)
 		else
 		{
 			count = 0;
-			// var otherSide = (side == "left" ? "right" : "left");
-			// var otherSide = (side == "left" ? "right" : "left");
-			//console.log( "other side: " + otherSide);
-			$( "#widgets" ).find( sideId ).find('.widget-easy' ).attr( 'data-side' , side );
+			// var otherSide = (side == 'left' ? 'right' : 'left');
+			// var otherSide = (side == 'left' ? 'right' : 'left');
+			//console.log( 'other side: ' + otherSide);
+			$( '#widgets-easy' ).find( sideId ).find( '.widget-easy' ).attr( 'data-side' , side );
 		}
 
-		var order = setInterval( function()
-		{
-			if( side == "right" && ( count == 0 || data == 0) )
-				realOrder( order );
+		var order = setInterval( function() {
+			if( side == 'right' && (count == 0 || data == 0) )
+				console.log( order );
+			realOrder( order );
 		} , 1 );
 	} );
 }
-
 
 function realOrder( order )
 {
 	clearInterval( order );
 
 	// Seleciona as divs que queremos ordenar
-	var widgets = $( '#widgets' );
+	var widgets = $( '#widgets-easy' );
 
-	var left  = widgets.find( "#widgetLeft" );
-	var right = widgets.find( "#widgetRight" );
+	var left  = widgets.find( '#widgetLeft' );
+	var right = widgets.find( '#widgetRight' );
 
 	// get other side
 	var rightInLeft = left.find( '.widget-easy[data-side="right"]' );
@@ -237,32 +226,29 @@ function realOrder( order )
 	$( rightInLeft ).remove();
 	$( leftInRight ).remove();
 	// add side right
-	$( "#widgetRight" ).append( rightInLeft );
-	$( "#widgetLeft" ).append( leftInRight );
+	$( '#widgetRight' ).append( rightInLeft );
+	$( '#widgetLeft' ).append( leftInRight );
 
-	orderSide( left.find( '.widget-easy' ) , "#widgetLeft" );
-	orderSide( right.find( '.widget-easy' ) , "#widgetRight" );
+	orderSide( left.find( '.widget-easy' ) , '#widgetLeft' );
+	orderSide( right.find( '.widget-easy' ) , '#widgetRight' );
 
 	// hide / close widget function
-	$( '.hide-widget' ).on( 'click' , function()
-	{
+	$( '.hide-widget' ).on( 'click' , function() {
 		var widget = $( this ).parents( '.widget-easy' );
 		hideWidget( widget , 300 , true );
 	} );
 }
 
-function orderSide(divs , sideId)
+function orderSide( divs , sideId )
 {
 	// Converte a NodeList de divs para array
 	// https://developer.mozilla.org/en/docs/Web/API/NodeList#How_can_I_convert_NodeList_to_Array.3F
-	var ordem = [].map.call( divs , function( element )
-	{
+	var ordem = [].map.call( divs , function( element ) {
 		return element;
 	} );
 
 	// Ordena a array pelo atributo 'order'
-	ordem.sort( function( a , b )
-	{
+	ordem.sort( function( a , b ) {
 		var ca = parseInt( a.getAttribute( 'data-order' ) , 10 );
 		var cb = parseInt( b.getAttribute( 'data-order' ) , 10 );
 		return ca - cb;
@@ -270,55 +256,56 @@ function orderSide(divs , sideId)
 
 	// Reinsere os filhos no pai, resultando na ordem desejada
 	for( var i = 0 ; i < ordem.length ; i++ )
-		$( '#widgets' ).find(sideId).append( ordem[ i ] );
+		$( '#widgets-easy' ).find( sideId ).append( ordem[ i ] );
 }
 
+function showContainer()
+{
+	// dps de atualizar
+	$( '#widgets-easy' ).show( 1500 );
+}
 
 ///////////////////////////////////////////// BTN ACTIONS
 $( function() {
-	$( '#theme-setting' ).on("click", function()
-	{
-		console.log( "click" );
+	$( '#theme-setting' ).on( 'click' , function() {
+		console.log( 'click' );
 		var setting  = $( '#theme-setting' );
 		var setting2 = $( '#theme-setting2' );
 
-		if( setting.hasClass( "show-setting" ) )
+		if( setting.hasClass( 'show-setting' ) )
 		{
-			setting.addClass( "hide-setting" );
-			setting.removeClass( "show-setting" );
+			setting.addClass( 'hide-setting' );
+			setting.removeClass( 'show-setting' );
 
-			setting2.addClass( "show-setting" );
-			setting2.removeClass( "hide-setting" );
+			setting2.addClass( 'show-setting' );
+			setting2.removeClass( 'hide-setting' );
 		}
 	} );
 
-	$( '#close-setting' ).on("click", function()
-	{
+	$( '#close-setting' ).on( 'click' , function() {
 		var setting  = $( '#theme-setting' );
 		var setting2 = $( '#theme-setting2' );
 
-		if( setting2.hasClass( "show-setting" ) )
+		if( setting2.hasClass( 'show-setting' ) )
 		{
-			setting2.addClass( "hide-setting" );
-			setting2.removeClass( "show-setting" );
+			setting2.addClass( 'hide-setting' );
+			setting2.removeClass( 'show-setting' );
 
-			setting.addClass( "show-setting" );
-			setting.removeClass( "hide-setting" );
+			setting.addClass( 'show-setting' );
+			setting.removeClass( 'hide-setting' );
 		}
 	} );
 
 	// Close all widgets
-	$( '#close-all-widgets' ).on( "click", function()
-	{
+	$( '#close-all-widgets' ).on( 'click' , function() {
 		var widgetNames = [];
-		allWidgets.each( function()
-		{
-			if( $( this ).is( ":visible" ) )
+		allWidgets.each( function() {
+			if( $( this ).is( ':visible' ) )
 			{
 				var widget = $( this );
 
 				// encapsulando em array
-				widgetNames.push(widget.attr( 'id' ));
+				widgetNames.push( widget.attr( 'id' ) );
 				// colocando hide
 				widget.hide( 400 );
 				// pega as informações
@@ -327,21 +314,19 @@ $( function() {
 				// add to hidden list
 				closedWidgets.append( '<li><a href="javascript:void(0)" id="open" class="open-widget" data-id="' + widgetIdentifier + '"><i class="fa fa-external-link-square fa-flip-horizontal fa-fw"></i> ' + widgetName + '</a></li>' );
 			}
-		} ).promise().done(function( ) {
+		} ).promise().done( function() {
 			// ação somente se tiver alguem a ser fechado
-			if(widgetNames.length > 0)
+			if( widgetNames.length > 0 )
 			{
-				closedWidgetCount.text( $('#closed-widget-list').find('li').length );
-				ajaxData( 'widgetInsere', { opc : 'hidden' , itens : widgetNames.toString() } );
+				closedWidgetCount.text( $( '#closed-widget-list' ).find( 'li' ).length );
+				ajaxData( 'widgetInsere' , { opc : 'hidden' , itens : widgetNames.toString() } );
 			}
-		});
+		} );
 	} );
 
 	// Open all widgets
-	$( '#open-all-widgets' ).on( "click", function()
-	{
-		allWidgets.each( function()
-		{
+	$( '#open-all-widgets' ).on( 'click' , function() {
+		allWidgets.each( function() {
 			var widget = $( this );
 			// exibe
 			widget.show( 500 );
@@ -356,9 +341,8 @@ $( function() {
 	} );
 
 	// Open all widgets
-	$( '#reset-widgets' ).on( "click", function()
-	{
-		ajaxData( 'widgetReset', {}, function( r ) {
+	$( '#reset-widgets' ).on( 'click' , function() {
+		ajaxData( 'widgetReset' , {} , function( r ) {
 			r && location.reload();
 		} );
 	} );

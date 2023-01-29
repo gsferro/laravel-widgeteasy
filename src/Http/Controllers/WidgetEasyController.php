@@ -28,7 +28,9 @@ class WidgetEasyController extends Controller
         $method = $dados[ "method" ];
         if( blank( $method ) ) return redirect()->back();
 
-        $this->modal = new WidgetEasy();
+        //        dump($method, $dados);
+
+        $this->modal = WidgetEasy::find(auth()->user()->id);
         return $this->$method($dados);
     }
     /////////////////////////////// Widget dashboard
@@ -40,8 +42,6 @@ class WidgetEasyController extends Controller
      */
     private function widgetInsere($dados = [])
     {
-//        $dados = \Request::all();
-
         $valor = $dados[ "itens" ];
         switch( $dados[ 'opc' ] )
         {
@@ -60,19 +60,17 @@ class WidgetEasyController extends Controller
 
                     $valor = implode( ',', $_item );
                 }
-                break;
+            break;
             case 'left':
                 $collum = "widget_position_left";
-                break;
+            break;
             case 'right':
                 $collum = "widget_position_right";
-                break;
+            break;
         }
 
-        $user = $this->modal;
-        if( $user->update( [ $collum => ( self::StringIsNotNull( $valor ) ? $valor : null ) ] ) ) return $valor;
-        else
-            return null;
+        $update = $this->modal->update([$collum => $valor ?? null]);
+        return $update ? $valor : null;
     }
 
     private function widgetOpenAll()
@@ -96,23 +94,22 @@ class WidgetEasyController extends Controller
      */
     private function widgetRetorna($dados = [])
     {
-//        $dados = \Request::all();
+        //        $dados = \Request::all();
 
         switch( $dados[ 'opc' ] )
         {
             case 'hidden':
                 $collum = "widget_hidden";
-                break;
+            break;
             case 'left':
                 $collum = "widget_position_left";
-                break;
+            break;
             case 'right':
                 $collum = "widget_position_right";
-                break;
+            break;
 
             default:
                 return false;
-                break;
         }
         return $this->wgGet( $collum );
     }
@@ -121,13 +118,6 @@ class WidgetEasyController extends Controller
     {
         $reg = WidgetEasy::firstOrCreate( [ 'user_id' => auth()->user()->id ] );
 
-        return ( self::StringIsNotNull( $reg[ $collum ] ) ? $reg[ $collum ] : 0 );
-    }
-
-    private static function StringIsNotNull( $str )
-    {
-        // se for null retorna direto
-        if( is_null( $str ) ) return false;
-        return ( strlen( trim( $str ) ) > 0 ? true : false );
+        return ( !empty( $reg[ $collum ] ) ? $reg[ $collum ] : 0 );
     }
 }
