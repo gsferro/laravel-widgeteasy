@@ -11,3 +11,9 @@ salvando em banco como preferência de usuário logado.
 - Jquery
 - Jquery UI
 - font-aewsome
+
+### Instalação
+
+```bash 
+composer require gsferro/widget-easy && php artisan vendor:publish --provider="Gsferro\WidgetEasy\Providers\WidgetEasyServiceProvider" --force
+```
